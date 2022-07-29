@@ -1,0 +1,39 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "Metaverse Night Club Loyalty",
+      "description": "Metaverse Night Club Loyalty App API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Home",
+        "description": "Home desc"
+      }
+    ],
+    
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+ 
+
+  "paths":{
+        "/":{
+            "get": {
+                "tags": ["Home"],
+                "description": "Home controller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+  } 
+}
