@@ -11,12 +11,6 @@
     },
     "host": "localhost:3000",
     "basePath": "/",
-    "tags": [
-      {
-        "name": "Home",
-        "description": "Home desc"
-      }
-    ],
     
     "schemes": ["http"],
     "consumes": ["application/json"],
@@ -34,6 +28,40 @@
                     }
                 }
             }
+        },
+        "/signup":{
+                  "post":{
+                    "tags": ["Signup"],
+                    "description": "Signup",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    },
+                    "consumes": [
+                      "application/json"
+
+                    ],
+
+                    "parameters": [
+                      {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                          "$ref": "#/model/UserModel.js"
+                        }
+                      }
+                    ],
+
+                    "responses": {
+                      "200": {
+                        "description": "Controller ok"
+                      },
+                      "201": {
+                        "description": "User registered successfully"
+                      }
+                    }
+                  }
         }
   } 
 }
