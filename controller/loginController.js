@@ -2,11 +2,15 @@ const express = require("express")
 const router = express.Router()
 const UserModel = require("../model/userModel");
 
+
+
 router.post("/",(req,res)=>{
     const {email,password} = req.body;
     UserModel.findOne({email:email,password:password}).then((data)=>{
         if(data){
-            res.status(200).send(data)
+            req.session.user = data._id;
+            res.status(200).send("session id:" + req.session.user)
+
         }else{
             res.status(401).send("user not found")
         }

@@ -33,9 +33,7 @@
                   "post":{
                     "tags": ["Signup"],
                     "description": "Signup",
-                    "schema": {
-                      "$ref": "#/definitions/User"
-                    },
+                    
                     "consumes": [
                       "application/json"
 
@@ -45,23 +43,52 @@
                       {
                         "in": "body",
                         "name": "body",
-                        "description": "Pet object that needs to be added to the store",
+                        "description": "Created user object",
                         "required": true,
                         "schema": {
-                          "$ref": "#/model/UserModel.js"
+                          "$ref": "#/definitions/User"
                         }
                       }
                     ],
 
                     "responses": {
-                      "200": {
-                        "description": "Controller ok"
-                      },
+                     
                       "201": {
                         "description": "User registered successfully"
+                      },
+                      "400":{
+                        "description": "Unfilled fields"
+                      },
+                      "409":{
+                        "description": "E-mail already exists"
                       }
                     }
                   }
+                  
         }
-  } 
+        
+  },
+  "definitions": {
+    "User": {
+      "type":"object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email":{
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        }
+
+      }
+    }
+  }
+  
+  
 }

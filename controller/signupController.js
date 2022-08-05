@@ -3,9 +3,6 @@ const router = express.Router()
 const UserModel = require("../model/userModel")
 
 
-router.get("/",(req,res)=>{
-    res.status(404).send("404 not found")
-})
 
 
 router.post("/",(req,res)=>{
@@ -19,7 +16,8 @@ router.post("/",(req,res)=>{
         }else{
             const newUsr = new UserModel({
                 email,
-                password
+                password,
+                name
             })
 
             newUsr
