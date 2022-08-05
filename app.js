@@ -31,5 +31,7 @@ app.use("/logout",logoutController)
 const cardController = require("./controller/cardController")
 app.use("/cards",cardController)
 
+const bookingController = require("./controller/bookingController")
+app.use("/booking",bookingController)
 
 app.listen(3000,()=>console.log("server listen 3000"))

@@ -9,7 +9,7 @@ router.post("/",(req,res)=>{
     UserModel.findOne({email:email,password:password}).then((data)=>{
         if(data){
             req.session.user = data._id;
-            res.status(200).send("session id:" + req.session.user)
+            res.status(200).send("session id:" + gitreq.session.user)
 
         }else{
             res.status(401).send("user not found")
