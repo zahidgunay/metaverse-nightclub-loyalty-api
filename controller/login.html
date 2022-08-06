@@ -1,0 +1,22 @@
+<input type="submit" value="Post Et" id="btnPost" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnPost").click(function () {
+            $.ajax({
+                url: 'login',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+        dataType: "json",
+                data: JSON.stringify({ "email": "zahidgnay2521@gmail.com", "password": "12345" }),
+                success: function (gelenveri) {
+ 
+                },
+                error: function (hata) {
+ 
+                }
+            });
+        });
+    });
+</script>

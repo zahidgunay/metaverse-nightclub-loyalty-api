@@ -3,12 +3,9 @@ const router = express.Router()
 
 
 router.get("/",(req,res)=>{
-    req.session.user.destroy()
-    if(!req.session.user){
-        res.status(200).send("logout")
-    }else{
-        res.status(401).send("unauthorized")
-    }
+  req.logout();
+  res.redirect('/').send("logout oldu")
+  console.log("logout oldu biri")
 })
 
 

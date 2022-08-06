@@ -4,10 +4,11 @@ const router = express.Router()
 const bookingModel = require("../model/bookingModel")
 
 router.get("/",(req,res)=>{
-    const usrID = req.body.userID
-    bookingModel.find({userID:usrID}).then((data)=>{
+    res.send("hi book")
+ 
+  /*  bookingModel.find({userID:usrID}).then((data)=>{
         res.send(data)
-    })
+    })*/
 })
 
 

@@ -1,19 +1,17 @@
 const express = require("express")
 const app = express()
-const session = require('express-session');
 
 
 //Swagger
 const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json');
 app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
-app.set('trust proxy', 1)
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+
+
+app.get("/secret",(req,res)=>{
+  res.send("hi secret")
+})
+
 app.use(express.json());
 
 // Controller
@@ -33,5 +31,4 @@ app.use("/cards",cardController)
 
 const bookingController = require("./controller/bookingController")
 app.use("/booking",bookingController)
-
 app.listen(3000,()=>console.log("server listen 3000"))

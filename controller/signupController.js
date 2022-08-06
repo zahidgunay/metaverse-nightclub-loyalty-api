@@ -4,9 +4,8 @@ const UserModel = require("../model/userModel")
 
 
 
-
 router.post("/",(req,res)=>{
-   const {email,password} = req.body;
+  let {email,password,name} = req.body;
     if(!email || !password){
         res.status(400).send("Unfilled fields");
     }
@@ -14,6 +13,7 @@ router.post("/",(req,res)=>{
         if(usr){
             res.status(409).send("E-mail already exists")
         }else{
+            
             const newUsr = new UserModel({
                 email,
                 password,
@@ -21,12 +21,15 @@ router.post("/",(req,res)=>{
             })
 
             newUsr
+                
                 .save()
                 .then(()=>{
                     res.status(201).send("User registered successfully")
                 })
         }
     })
+
+
 
 })
 
