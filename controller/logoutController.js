@@ -3,9 +3,11 @@ const router = express.Router()
 
 
 router.get("/",(req,res)=>{
-  req.logout();
-  res.redirect('/').send("logout oldu")
-  console.log("logout oldu biri")
+res.cookie('jwt','',{maxAge:1});
+res.locals.usrID = null;
+res.status(200).json({
+    "message":"successfully logout"
+})
 })
 
 

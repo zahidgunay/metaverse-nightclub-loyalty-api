@@ -2,32 +2,33 @@ const express = require("express")
 const router = express.Router()
 const cardModel = require("../model/cardModel")
 
-// Session verisi ile find yapılacak
-router.get("/",(req,res)=>{
-    const usrID = req.body.userID;
-    cardModel.find({userID:usrID}).then((data)=>{
+router.get("/", (req, res) => {
+
+    cardModel.find({ userID: res.locals.usrID }).then((data) => {
         res.send(data)
+       
     })
+
 
 })
 
 
-router.post("/",(req,res)=>{
-    const {cardNumber,nameSurname,exDate,cvv,userID}=req.body;
-    cardModel.findOne({cardNumber:cardNumber}).then((cardData)=>{
-        if(cardData){
+router.post("/", (req, res) => {
+    const { cardNumber, nameSurname, exDate, cvv, userID } = req.body;
+    cardModel.findOne({ cardNumber: cardNumber }).then((cardData) => {
+        if (cardData) {
             res.status(409).send("Card already exists")
-        }else{
+        } else {
             const newCard = new cardModel({
-                    cardNumber,
-                    nameSurname,
-                    exDate,
-                    cvv,
-                    userID
+                cardNumber,
+                nameSurname,
+                exDate,
+                cvv,
+                userID
             })
             newCard
                 .save()
-                .then(()=>{
+                .then(() => {
                     res.status(201).send("Card registered successfully")
                 })
         }
@@ -35,14 +36,14 @@ router.post("/",(req,res)=>{
 })
 
 
-router.delete("/",(req,res)=>{
+router.delete("/", (req, res) => {
     const itemID = req.body.itemID
-    cardModel.deleteOne({_id:itemID},(error)=>{
-         if(error){
+    cardModel.deleteOne({ _id: itemID }, (error) => {
+        if (error) {
             throw error
-         }else{
+        } else {
             res.status(202).send("Successfully deleted")
-         }
+        }
     })
 })
 
@@ -59,4 +60,4 @@ router.delete("/",(req,res)=>{
 
 
 
-module.exports=router
+module.exports = router

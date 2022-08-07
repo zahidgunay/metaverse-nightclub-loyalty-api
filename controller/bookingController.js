@@ -1,14 +1,16 @@
 const express = require("express")
 const router = express.Router()
-
+const jwt = require("jsonwebtoken")
 const bookingModel = require("../model/bookingModel")
 
 router.get("/",(req,res)=>{
-    res.send("hi book")
+
+        bookingModel.find({userID:res.locals.usrID}).then((data)=>{
+            res.send(data)
+        })
+  
  
-  /*  bookingModel.find({userID:usrID}).then((data)=>{
-        res.send(data)
-    })*/
+
 })
 
 

@@ -3,6 +3,7 @@ const router = express.Router()
 const UserModel = require("../model/userModel");
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs")
 router.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname, '/', 'login.html'));
 })
@@ -14,15 +15,20 @@ const createToken=(id)=>{
 
 router.post("/",(req,res)=>{
     const {email,password} = req.body;
-    UserModel.findOne({email:email,password:password}).then((data)=>{
+    
+    UserModel.findOne({email:email}).then((data)=>{
         if(data){
            const token = createToken(data._id)
-           console.log(token)
-            
-
-            res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000})
+         
+           const validPassword = bcrypt.compare(password, data.password);
+            if(validPassword){
+                res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000})
         
-            res.redirect("/booking")
+                res.redirect("/booking")
+            }else{
+                res.status(400).json({ error: "Invalid Password" });
+            }
+
         }else{
             res.status(402).send("user not found")
         }
