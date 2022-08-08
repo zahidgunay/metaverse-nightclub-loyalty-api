@@ -1,94 +1,520 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0", 
-      "title": "Metaverse Night Club Loyalty",
-      "description": "Metaverse Night Club Loyalty App API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Metaverse Night Club Loyalty",
+    "description": "Metaverse Night Club Loyalty App API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Home page",
+        "responses": {
+          "200": {
+            "description": "authorized",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
-    "host": "localhost:3000",
-    "basePath": "/",
-    
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
- 
-
-  "paths":{
-        "/":{
-            "get": {
-                "tags": ["Home"],
-                "description": "Home controller",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
+    "/signup": {
+      "post": {
+        "tags": [
+          "Signup"
+        ],
+        "description": "Signup",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
-        },
-        "/signup":{
-                  "post":{
-                    "tags": ["Signup"],
-                    "description": "Signup",
-                    
-                    "consumes": [
-                      "application/json"
-
-                    ],
-
-                    "parameters": [
-                      {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                          "$ref": "#/definitions/User"
-                        }
-                      }
-                    ],
-
-                    "responses": {
-                     
-                      "201": {
-                        "description": "User registered successfully"
-                      },
-                      "400":{
-                        "description": "Unfilled fields"
-                      },
-                      "409":{
-                        "description": "E-mail already exists"
-                      }
-                    }
-                  }
-                  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Unfilled fields",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "E-mail already exists",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
         }
-        
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Allows the user to log into the system",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User login object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid Password",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": [
+          "Logout"
+        ],
+        "summary": "Allows the user to log out",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully logout",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Returns the user's profile information",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User's profile data successfully returned",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        }
+      }
+    },
+    "/booking": {
+      "get": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Returns the user's booking",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User's booking data successfully returned",
+            "schema": {
+              "$ref": "#/definitions/Booking"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Create new booking",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Booking object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Booking"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "reservation successfully created",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Delete booking",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Booking object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/cards": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "summary": "Returns the user's cards",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Cards object",
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "return cards",
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "summary": "Create new card",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Card object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Card registered successfully",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Card"
+        ],
+        "summary": "Delete card",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Card object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/coupons": {
+      "get": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Return user's coupons",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Card object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return coupons",
+            "schema": {
+              "$ref": "#/definitions/Coupons"
+            }
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "User": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id": {
           "type": "integer"
         },
-        "email":{
-          "type": "string"
+        "email": {
+          "type": "string",
+          "example": "zahidgnay@gmail.com"
         },
         "password": {
+          "type": "string",
+          "example": 12345
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string",
+          "example": "Zahid Günay"
+        }
+      }
+    },
+    "UserLogin": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string",
+          "example": "zahidgnay@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": 12345
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "zahidgnay@gmail.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "Zahid Günay"
+        },
+        "profilePic": {
+          "type": "string",
+          "example": "/public/images/zg.png"
+        },
+        "date": {
+          "type": "string",
+          "example": "5.08.2022"
+        }
+      }
+    },
+    "Booking": {
+      "type": "object",
+      "properties": {
+        "userID": {
+          "type": "string"
+        },
+        "bookingDate": {
+          "type": "string",
+          "example": "1.01.2023"
+        },
+        "person": {
+          "type": "integer",
+          "example": 4
+        },
+        "bookingNote": {
           "type": "string"
         },
         "date": {
           "type": "string",
           "format": "date-time"
         }
-
+      }
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "type": "string"
+        }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "userID": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "integer"
+        },
+        "nameSurname": {
+          "type": "string"
+        },
+        "exDate": {
+          "type": "string"
+        },
+        "cvv": {
+          "type": "integer"
+        }
+      }
+    },
+    "Coupons": {
+      "type": "object",
+      "properties": {
+        "userID": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exDate": {
+          "type": "string"
+        }
       }
     }
   }
-  
-  
 }

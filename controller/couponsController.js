@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
 
     couponsModel.find({ userID: res.locals.usrID }).then((couponData) => {
             
-            res.status(200).send(couponData)
+            res.status(200).json(couponData)
 
     })
 })

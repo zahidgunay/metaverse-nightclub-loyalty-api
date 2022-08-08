@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cookieParser = require('cookie-parser')
 const {auth} = require("./middleware/auth")
+const {sessionCheck} = require("./middleware/sessionCheck")
 //Swagger
 const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json');
@@ -15,9 +16,9 @@ app.use(express.json());
 // Controller
 
 const homeController = require("./controller/homeController")
-app.use("/",homeController)
+app.use("/",sessionCheck,homeController)
 const signupController = require("./controller/signupController")
-app.use("/signup",signupController)
+app.use("/signup",auth,signupController)
 const loginController = require("./controller/loginController")
 app.use("/login",loginController)
 

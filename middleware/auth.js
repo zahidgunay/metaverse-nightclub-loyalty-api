@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken")
 
 const auth = (req,res,next)=>{
-    const token = req.cookies.jwt
+    const token = req.cookies.token
     if(token){
-        jwt.verify(token,'gizli',(error,deToken)=>{
+        jwt.verify(token,'secureComp',(error,deToken)=>{
             if(error){
                 res.send(error);
                 res.locals.user = null
@@ -14,7 +14,7 @@ const auth = (req,res,next)=>{
             }
         })
     }else{
-        res.redirect("/login")
+        res.json({message:"Redirect /login"})
     }
 
 }
