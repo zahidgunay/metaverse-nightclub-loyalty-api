@@ -39,3 +39,5 @@ app.use("/coupons",auth,couponsController)
 
 
 app.listen(3000,()=>console.log("server listen 3000"))
+
+module.exports = app

@@ -19,7 +19,7 @@ router.post("/",(req,res)=>{
          
            const validPassword = bcrypt.compare(password, data.password);
             if(validPassword){
-                res.cookie('token',token,{httpOnly:true,maxAge:maxAge*1000})
+                res.cookie('token',token,{httpOnly:true})
         
                 res.redirect("/booking")
             }else{
