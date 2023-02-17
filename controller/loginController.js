@@ -18,6 +18,7 @@ router.post("/",(req,res)=>{
            const token = createToken(data._id)
          
            const validPassword = bcrypt.compare(password, data.password);
+           res.send('giriş başarılı')
             if(validPassword){
                 res.cookie('token',token,{httpOnly:true})
         
