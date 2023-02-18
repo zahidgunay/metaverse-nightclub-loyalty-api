@@ -3,6 +3,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const {auth} = require("./middleware/auth")
 const {sessionCheck} = require("./middleware/sessionCheck")
+
 //Swagger
 const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json');

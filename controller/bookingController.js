@@ -1,31 +1,32 @@
 const express = require("express")
 const router = express.Router()
 const bookingModel = require("../model/bookingModel")
+router.get("/", (req, res) => {
+    
+    bookingModel.find({ userID: "62efbf858cba70da7a40b47"})
+    .then((data)=>{
+        console.log(data)
+         res.status(200).json(data)
+     }) 
 
-router.get("/",(req,res)=>{
 
-        bookingModel.find({userID:res.locals.usrID}).then((data)=>{
-            res.status(200).json(data)
-        })
-  
- 
 
 })
 
 
-router.post("/",(req,res)=>{
-    const {userID,bookingDate,person,bookingNote} = req.body
+router.post("/", (req, res) => {
+    const { userID, bookingDate, person, bookingNote } = req.body
     const newBooking = new bookingModel({
-            userID,
-            bookingDate,
-            person,
-            bookingNote
+        userID,
+        bookingDate,
+        person,
+        bookingNote
 
     })
     newBooking
         .save()
-        .then(()=>{
-            res.status(201).json({message:"reservation successfully created"})
+        .then(() => {
+            res.status(201).json({ message: "reservation successfully created" })
         })
 })
 
@@ -35,7 +36,7 @@ router.delete("/", (req, res) => {
         if (error) {
             throw error
         } else {
-            res.status(202).json({message:"Successfully deleted"})
+            res.status(202).json({ message: "Successfully deleted" })
         }
     })
 })

@@ -5,7 +5,7 @@ const router = express.Router()
 router.get("/",(req,res)=>{
 res.cookie('token','',{maxAge:1});
 res.locals.usrID = null;
-res.status(200).json({
+res.sendStatus(200).json({
     "message":"successfully logout"
 })
 })

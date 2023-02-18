@@ -5,8 +5,7 @@ const couponsModel = require("../model/couponsModel")
 router.get("/", (req, res) => {
 
     couponsModel.find({ userID: res.locals.usrID }).then((couponData) => {
-            
-            res.status(200).json(couponData)
+          return  res.json(couponData)
 
     })
 })

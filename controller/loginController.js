@@ -16,13 +16,13 @@ router.post("/",(req,res)=>{
     UserModel.findOne({email:email}).then((data)=>{
         if(data){
            const token = createToken(data._id)
-         
            const validPassword = bcrypt.compare(password, data.password);
-           res.send('giriş başarılı')
             if(validPassword){
-                res.cookie('token',token,{httpOnly:true})
-        
-                res.redirect("/booking")
+                res
+                    .cookie('token',token,{httpOnly:true})
+                    .status(200).json({message:"Login success"})
+                   
+
             }else{
                 res.status(400).json({ error: "Invalid Password" });
             }
